@@ -1,5 +1,5 @@
 <ion-content>
   <!-- Default Searchbar -->
-  <ion-searchbar></ion-searchbar>
-  <app-search-result></app-search-result>
+  <ion-searchbar [(ngModel)]="query" (change)="onSearch($event)"></ion-searchbar>
+  <app-search-result *ngFor="let item of items" [result]="item"></app-search-result>
 </ion-content>

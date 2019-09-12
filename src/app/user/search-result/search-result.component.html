@@ -1,3 +1,10 @@
-<p>
-  search-result works!
-</p>
+<ion-card>
+  <ion-img style="height: 100px" [src]="result?.thumbnail"></ion-img>
+  <ion-card-header>
+    <ion-card-title>{{result?.title}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    {{result?.description}}
+  </ion-card-content>
+</ion-card>
