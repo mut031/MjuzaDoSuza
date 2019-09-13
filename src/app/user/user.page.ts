@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from './item.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+
 
 @Component({
   selector: 'app-user',
@@ -8,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./user.page.scss'],
 })
 export class UserPage implements OnInit {
-  apiUrl: string = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=iron%20maiden&key=AIzaSyDOv8hKWlin7SnRsvyy30jPOuZcGH2-USk';
+  query: string;
 
   items: Item[] = [];
   data: any;
@@ -18,20 +20,26 @@ export class UserPage implements OnInit {
   ngOnInit() {
   }
 
-  onSearch() {
-    this.http.get(this.apiUrl)
-    .subscribe(data => this.filterResults(data));
+  get apiUrl(): string {
+    return `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${this.query}&key=${environment.YOUTUBE_API_KEY}`;
   }
 
-  filterResults(data: any){
+  onSearch() {
+    console.log(this.query)
+    console.log(this.apiUrl)
+    this.http.get(this.apiUrl)
+      .subscribe(data => this.filterResults(data));
+  }
+
+  filterResults(data: any) {
     console.log(data.items)
     this.items = data.items
-                .filter(item => item.id.kind === 'youtube#video')
-                .map(item => ({
-                  id: item.id.videoId,
-                  title: item.snippet.title,
-                  description: item.snippet.description,
-                  thumbnail: item.snippet.thumbnails.medium.url
-                }));
+      .filter(item => item.id.kind === 'youtube#video')
+      .map(item => ({
+        id: item.id.videoId,
+        title: item.snippet.title,
+        description: item.snippet.description,
+        thumbnail: item.snippet.thumbnails.medium.url
+      }));
   }
 }
