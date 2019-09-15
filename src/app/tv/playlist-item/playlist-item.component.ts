@@ -17,6 +17,7 @@ export class PlaylistItemComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    console.log(this.result.id);
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

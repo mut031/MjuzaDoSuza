@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { TvPage } from './tv.page';
 import { PlaylistItemComponent } from './playlist-item/playlist-item.component';
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgxYoutubePlayerModule
   ],
   declarations: [TvPage, PlaylistItemComponent]
 })
