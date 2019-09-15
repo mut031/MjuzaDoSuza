@@ -30,6 +30,7 @@ export class TvPage implements OnInit {
   }
 
   onStateChange(event) {
+    console.log(event)
     this.ytEvent = event.data;
   }
   savePlayer(player) {
