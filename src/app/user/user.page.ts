@@ -25,14 +25,11 @@ export class UserPage implements OnInit {
   }
 
   onSearch() {
-    console.log(this.query)
-    console.log(this.apiUrl)
     this.http.get(this.apiUrl)
       .subscribe(data => this.filterResults(data));
   }
 
   filterResults(data: any) {
-    console.log(data.items)
     this.items = data.items
       .filter(item => item.id.kind === 'youtube#video')
       .map(item => ({

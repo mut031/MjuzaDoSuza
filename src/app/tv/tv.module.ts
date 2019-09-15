@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TvPage } from './tv.page';
+import { PlaylistItemComponent } from './playlist-item/playlist-item.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TvPage]
+  declarations: [TvPage, PlaylistItemComponent]
 })
 export class TvPageModule {}

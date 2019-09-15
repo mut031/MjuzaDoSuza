@@ -1,4 +1,4 @@
-<ion-item (click)="addToPlaylist()">
+<ion-item>
   <ion-thumbnail class="ion-margin-end">
     <img src="{{result.thumbnail}}">
   </ion-thumbnail>
@@ -6,4 +6,5 @@
     <h2>{{result?.title}}</h2>
     <p>{{result?.description}}</p>
   </ion-label>
+  <ion-icon (click)="removeFromPlaylist()" name="trash" class="ion-margin-start trash" color="danger"></ion-icon>
 </ion-item>
