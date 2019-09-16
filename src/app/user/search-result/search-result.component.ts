@@ -16,7 +16,7 @@ export class SearchResultComponent implements OnInit {
   ngOnInit() { }
 
   addToPlaylist() {
-    this.http.put(`${environment.SERVER_URL}/playlist`, { item: this.result })
-      .subscribe(data => console.log('put response', data));
+    this.http.post(`${environment.SERVER_URL}/playlist`, { item: this.result })
+      .subscribe(data => console.log('post response', data));
   }
 }
