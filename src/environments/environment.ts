@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   YOUTUBE_API_KEY: 'AIzaSyDOv8hKWlin7SnRsvyy30jPOuZcGH2-USk',
+  SERVER_URL: "http://localhost:3001"
 };
 
 /*

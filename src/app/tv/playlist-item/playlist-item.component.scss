@@ -1,3 +1,12 @@
-.trash {
+.thumbnail {
+    cursor: pointer;
+}
+.title:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.trash:hover {
+    background-color: blue;
     cursor: pointer;
 }

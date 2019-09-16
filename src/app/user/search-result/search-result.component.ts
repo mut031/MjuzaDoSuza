@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Item } from '../item.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search-result',
@@ -15,7 +16,7 @@ export class SearchResultComponent implements OnInit {
   ngOnInit() { }
 
   addToPlaylist() {
-    this.http.put('http://localhost:3000/playlist', { item: this.result })
+    this.http.put(`${environment.SERVER_URL}/playlist`, { item: this.result })
       .subscribe(data => console.log('put response', data));
   }
 }
