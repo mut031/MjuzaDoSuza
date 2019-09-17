@@ -18,6 +18,5 @@ export class SearchResultComponent implements OnInit {
   addToPlaylist() {
     this.http.post(`${environment.SERVER_URL}/playlist`, { item: this.result })
       .subscribe(data => console.log('post response', data));
-    alert('MRKI CIGAN NAJVECI!!!!!!');
   }
 }
