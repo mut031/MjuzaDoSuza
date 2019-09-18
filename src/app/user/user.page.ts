@@ -25,8 +25,10 @@ export class UserPage implements OnInit {
   }
 
   onSearch() {
-    this.http.get(this.apiUrl)
-      .subscribe(data => this.filterResults(data));
+    setTimeout(() => {
+      this.http.get(this.apiUrl)
+        .subscribe(data => this.filterResults(data));
+    }, 1000);
   }
 
   filterResults(data: any) {
