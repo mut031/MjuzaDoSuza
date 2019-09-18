@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '../user/item.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-tv',
@@ -16,10 +17,15 @@ export class TvPage implements OnInit {
   private ytEvent;
   private currentSongIndex;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private socket: Socket) { }
 
   ngOnInit() {
     this.getPlaylist();
+
+    this.socket.connect();
+    this.socket.fromEvent('update').subscribe(() =>{
+      this.getPlaylist();
+    });
   }
 
   getPlaylist() {

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Item } from '../item.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-search-result',
@@ -11,12 +12,14 @@ import { environment } from 'src/environments/environment';
 export class SearchResultComponent implements OnInit {
   @Input() result: Item;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private socket: Socket) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.socket.connect();
+  }
 
   addToPlaylist() {
     this.http.post(`${environment.SERVER_URL}/playlist`, { item: this.result })
-      .subscribe(data => console.log('post response', data));
+      .subscribe(() => this.socket.emit('updatePlaylist'));
   }
 }
