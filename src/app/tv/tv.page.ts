@@ -33,7 +33,7 @@ export class TvPage implements OnInit {
       .subscribe((data: Array<Item>) => {
         this.currentSong = data.filter((item, index) => {
           if (item.isCurrent) {
-            this.currentSongIndex = index
+            this.currentSongIndex = index;
             return true;
           }
           return false;

@@ -1,4 +1,4 @@
-<ion-item (click)="addToPlaylist()">
+<ion-item (click)="addToPlaylist()" class="item">
   <ion-thumbnail class="ion-margin-end">
     <img src="{{result.thumbnail}}">
   </ion-thumbnail>
@@ -6,4 +6,5 @@
     <h2>{{result?.title}}</h2>
     <p>{{result?.description}}</p>
   </ion-label>
+  <ion-spinner *ngIf="isAdding" color="primary" class="ion-margin"></ion-spinner>
 </ion-item>
