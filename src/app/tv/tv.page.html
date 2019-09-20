@@ -1,12 +1,12 @@
-<ion-content>
+<ion-content *ngIf="currentSong">
   <ion-grid class="grid ion-padding">
     <ion-row>
       <ion-col size="5" class="col">
-        <youtube-player [videoId]="id" (ready)="savePlayer($event)" (change)="onStateChange($event)"></youtube-player>
+        <youtube-player [videoId]="currentSong.id" (ready)="savePlayer($event)" (change)="onStateChange($event)"></youtube-player>
       </ion-col>
       <ion-col size="7">
         <ion-list>
-          <app-playlist-item *ngFor="let item of items" [result]="item" (updatePlaylist)="updatePlaylist()">
+          <app-playlist-item *ngFor="let item of items" [result]="item" (updatePlaylist)="updatePlaylist()" (playSong)="playSongOnClick($event[0])">
           </app-playlist-item>
         </ion-list>
       </ion-col>

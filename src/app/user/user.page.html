@@ -1,7 +1,8 @@
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" *ngIf="!isSearching">
   <!-- Default Searchbar -->
   <ion-searchbar [(ngModel)]="query" (change)="onSearch($event)"></ion-searchbar>
   <ion-list>
     <app-search-result *ngFor="let item of items" [result]="item"></app-search-result>
   </ion-list>
 </ion-content>
+<ion-spinner id="spinner" color="primary" *ngIf="isSearching"></ion-spinner>

@@ -12,11 +12,16 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
+import { environment } from '../environments/environment';
+const config: SocketIoConfig = { url: `${environment.SERVER_URL}`, options: {} };
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, NgxYoutubePlayerModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, NgxYoutubePlayerModule.forRoot(), SocketIoModule.forRoot(config), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
     SplashScreen,
@@ -24,4 +29,4 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

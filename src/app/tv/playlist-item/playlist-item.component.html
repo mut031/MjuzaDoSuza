@@ -1,9 +1,9 @@
-<ion-item>
-  <ion-thumbnail class="ion-margin-end">
+<ion-item [attr.color]="result.isCurrent ? 'primary' : ''" class="item">
+  <ion-thumbnail (click)="playMe()" class="ion-margin-end thumbnail">
     <img src="{{result.thumbnail}}">
   </ion-thumbnail>
   <ion-label>
-    <h2>{{result?.title}}</h2>
+    <h2 (click)="playMe()" class="title">{{result?.title}}</h2>
     <p>{{result?.description}}</p>
   </ion-label>
   <ion-icon (click)="removeFromPlaylist()" name="trash" class="ion-margin-start trash" color="danger"></ion-icon>

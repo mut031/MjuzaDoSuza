@@ -11,22 +11,27 @@ import { environment } from '../../environments/environment';
 })
 export class UserPage implements OnInit {
   query: string;
-
   items: Item[] = [];
   data: any;
+  isSearching: boolean = false;
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  apiUrl(query: string): string {
+    let q = query.replace(' ', '%20');
+    return `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${q}&key=${environment.YOUTUBE_API_KEY}`;
   }
 
-  get apiUrl(): string {
-    return `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${this.query}&key=${environment.YOUTUBE_API_KEY}`;
-  }
-
-  onSearch() {
-    this.http.get(this.apiUrl)
-      .subscribe(data => this.filterResults(data));
+  onSearch(e) {
+    this.query = e.target.value;
+    this.isSearching = true;
+    this.http.get(this.apiUrl(e.target.value))
+      .subscribe(data => {
+        this.filterResults(data);
+        this.isSearching = false;
+      });
   }
 
   filterResults(data: any) {
