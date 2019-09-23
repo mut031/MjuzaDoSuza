@@ -1,8 +1,24 @@
 <ion-content class="ion-padding" *ngIf="!isSearching">
-  <!-- Default Searchbar -->
-  <ion-searchbar [(ngModel)]="query" (change)="onSearch($event)"></ion-searchbar>
+  <ion-searchbar id="search" [(ngModel)]="query" (change)="onSearch($event)"></ion-searchbar>
   <ion-list>
     <app-search-result *ngFor="let item of items" [result]="item"></app-search-result>
   </ion-list>
+
+  <ion-content *ngIf="!items.length && !firstSearch" class="ion-text-center">
+    <ion-icon name="outlet" class="outlet" color="danger"></ion-icon>
+    <ion-text color="medium">
+      <h1>Oh snap!</h1>
+      <p>No results found for "{{query}}"</p>
+    </ion-text>
+  </ion-content>
+
+  <ion-content *ngIf="firstSearch" class="ion-text-center">
+    <ion-icon name="musical-notes" class="notes" color="primary"></ion-icon>
+    <ion-text color="medium">
+      <h1>Mjuza Do Suza</h1>
+      <p>Search and add songs to playlist</p>
+    </ion-text>
+  </ion-content>
+
 </ion-content>
 <ion-spinner id="spinner" color="primary" *ngIf="isSearching"></ion-spinner>

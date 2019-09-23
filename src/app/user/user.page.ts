@@ -3,7 +3,6 @@ import { Item } from './item.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-
 @Component({
   selector: 'app-user',
   templateUrl: './user.page.html',
@@ -14,6 +13,7 @@ export class UserPage implements OnInit {
   items: Item[] = [];
   data: any;
   isSearching: boolean = false;
+  firstSearch: boolean = true;
 
   constructor(private http: HttpClient) { }
 
@@ -21,10 +21,19 @@ export class UserPage implements OnInit {
 
   apiUrl(query: string): string {
     let q = query.replace(' ', '%20');
-    return `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${q}&key=${environment.YOUTUBE_API_KEY}`;
+    return `${environment.SERVER_URL}/search?q=${q}`;
+    // return `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${q}&key=${environment.YOUTUBE_API_KEY}`;
   }
 
   onSearch(e) {
+    // DON'T MAKE API SEARCH CALL
+    // var retrievedObject = localStorage.getItem('data');
+    // if (retrievedObject) {
+    //   this.items = JSON.parse(retrievedObject);
+    //   return;
+    // }
+
+    this.firstSearch = false;
     this.query = e.target.value;
     this.isSearching = true;
     this.http.get(this.apiUrl(e.target.value))
@@ -32,16 +41,23 @@ export class UserPage implements OnInit {
         this.filterResults(data);
         this.isSearching = false;
       });
+
   }
 
   filterResults(data: any) {
-    this.items = data.items
-      .filter(item => item.id.kind === 'youtube#video')
-      .map(item => ({
-        id: item.id.videoId,
-        title: item.snippet.title,
-        description: item.snippet.description,
-        thumbnail: item.snippet.thumbnails.medium.url
-      }));
+    this.items = data.results
+      .filter(item => item.video.duration !== 'Playlist')
+      .map(item => {
+        return {
+          id: item.video.id,
+          title: item.video.title,
+          description: item.uploader.username,
+          thumbnail: item.video.thumbnail_src,
+          duration: item.video.duration
+        }
+      });
+
+    //DON'T MAKE API SEARCH CALL
+    localStorage.setItem('data', JSON.stringify(this.items));
   }
 }

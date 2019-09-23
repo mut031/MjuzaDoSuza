@@ -19,7 +19,6 @@ export class PlaylistItemComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    console.log(this.result.id);
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -29,11 +28,11 @@ export class PlaylistItemComponent implements OnInit {
   }
 
   removeFromPlaylist() {
-    console.log('deleting from playlist')
     this.http.delete(`${environment.SERVER_URL}/playlist`, this.httpOptions)
       .subscribe(data => {
         if (data)
           this.updatePlaylist.emit();
+        console.log(data)
       });
   }
 

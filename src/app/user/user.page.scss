@@ -2,3 +2,13 @@
     display: block;
     margin: auto;
 }
+
+.outlet, .notes {
+    zoom: 5;
+    margin: 10px auto 0;
+    display: block;
+}
+
+#search {
+    --icon-color: #3880ff;
+}

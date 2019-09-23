@@ -1,10 +1,11 @@
 <ion-item (click)="addToPlaylist()" class="item">
-  <ion-thumbnail class="ion-margin-end">
+  <ion-thumbnail class="ion-margin-end img">
     <img src="{{result.thumbnail}}">
   </ion-thumbnail>
-  <ion-label>
-    <h2>{{result?.title}}</h2>
+  <ion-label class="ion-text-wrap">
+    <h3>{{result?.title}}</h3>
     <p>{{result?.description}}</p>
+    <p>{{result?.duration}}</p>
   </ion-label>
   <ion-spinner *ngIf="isAdding" color="primary" class="ion-margin"></ion-spinner>
 </ion-item>

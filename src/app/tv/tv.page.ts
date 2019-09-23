@@ -31,6 +31,7 @@ export class TvPage implements OnInit {
   getPlaylist() {
     this.http.get(`${environment.SERVER_URL}/playlist`)
       .subscribe((data: Array<Item>) => {
+        //find umjesto filter
         this.currentSong = data.filter((item, index) => {
           if (item.isCurrent) {
             this.currentSongIndex = index;

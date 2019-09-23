@@ -1,25 +1,8 @@
+h1 {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    margin-top: 50px;
+}
+
 .content {
-  text-align: center;
-  top: 20%;
-  max-height: 400px;
-
-  .title {
-    display: block;
-    font-size: 80px;
-    font-weight: bold;
-    color: #f04141;
-  }
-
-  .play {
-    width: 15em;
-    height: 15em;
-
-    &:focus {
-        outline: none;
-    }
-
-    &:hover {
-        cursor: pointer;
-    }
-  }
+    --background: #fff url('https://img.freepik.com/vrije-photo/abstract-inkblot_1112-816.jpg?size=626&ext=jpg') no-repeat center center / cover;
 }

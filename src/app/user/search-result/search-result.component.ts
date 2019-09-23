@@ -20,23 +20,36 @@ export class SearchResultComponent implements OnInit {
     this.socket.connect();
   }
 
-  async presentToast() {
+  async presentToastWithOptions(data) {
     const toast = await this.toastController.create({
-      message: 'Song added to playlist!',
-      duration: 2000
+      message: data["message"],
+      position: 'bottom',
+      duration: 2500,
+      color: data["status"],
+      buttons: [
+        {
+          side: 'start',
+          icon: 'musical-notes',
+        },
+        {
+          icon: 'close',
+          role: 'cancel'
+        }
+      ]
     });
     toast.present();
+    this.isAdding = false;
   }
 
   addToPlaylist() {
     this.isAdding = true;
     this.http.post(`${environment.SERVER_URL}/playlist`, { item: this.result })
-      .subscribe(() => {
+      .subscribe((data) => {
         setTimeout(() => {
-          this.socket.emit('updatePlaylist');
-          this.presentToast();
-          this.isAdding = false;
-        }, 2000);
+          if(data['status'] === 'success')
+            this.socket.emit('updatePlaylist');
+          this.presentToastWithOptions(data);
+        }, 1100);
       });
   }
 }
