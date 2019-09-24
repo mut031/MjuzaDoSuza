@@ -26,13 +26,6 @@ export class UserPage implements OnInit {
   }
 
   onSearch(e) {
-    // DON'T MAKE API SEARCH CALL
-    // var retrievedObject = localStorage.getItem('data');
-    // if (retrievedObject) {
-    //   this.items = JSON.parse(retrievedObject);
-    //   return;
-    // }
-
     this.firstSearch = false;
     this.query = e.target.value;
     this.isSearching = true;
@@ -56,8 +49,5 @@ export class UserPage implements OnInit {
           duration: item.video.duration
         }
       });
-
-    //DON'T MAKE API SEARCH CALL
-    localStorage.setItem('data', JSON.stringify(this.items));
   }
 }

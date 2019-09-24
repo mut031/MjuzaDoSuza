@@ -31,14 +31,8 @@ export class TvPage implements OnInit {
   getPlaylist() {
     this.http.get(`${environment.SERVER_URL}/playlist`)
       .subscribe((data: Array<Item>) => {
-        //find umjesto filter
-        this.currentSong = data.filter((item, index) => {
-          if (item.isCurrent) {
-            this.currentSongIndex = index;
-            return true;
-          }
-          return false;
-        })[0];
+        this.currentSong = data.find(item => item.isCurrent);
+        this.currentSongIndex = data.findIndex(item => item.isCurrent);
         this.items = data;
       });
   }
@@ -50,26 +44,13 @@ export class TvPage implements OnInit {
   onStateChange(event) {
     this.ytEvent = event.data;
     if (this.ytEvent === 0) {
-      this.playNextSong();
+      this.playNextSong(this.items[this.currentSongIndex + 1] ? this.items[this.currentSongIndex + 1].id : this.items[0].id);
     }
   }
 
-  playNextSong() {
-    this.currentSong = this.items[++this.currentSongIndex];
-    this.items[this.currentSongIndex].isCurrent = true;
-    this.items[this.currentSongIndex - 1].isCurrent = false;
-    this.updateCurrentSong(this.items[this.currentSongIndex - 1].id);
-    this.player.loadVideoById(this.currentSong.id);
-  }
-
-  playSongOnClick(id: string) {
-    let oldId = this.items[this.currentSongIndex].id;
-    this.items[this.currentSongIndex].isCurrent = false;
-    this.currentSongIndex = this.items.findIndex(item => item.id === id);
-    this.items[this.currentSongIndex].isCurrent = true;
-    this.currentSong = this.items[this.currentSongIndex];
-    this.updateCurrentSong(oldId);
-    this.player.loadVideoById(id);
+  playNextSong(newSongId: string) {
+    this.updateCurrentSong(newSongId);
+    this.player.loadVideoById(newSongId);
   }
 
   savePlayer(player) {
@@ -77,10 +58,12 @@ export class TvPage implements OnInit {
     this.playVideo();
   }
 
-  updateCurrentSong(oldId: string) {
-    this.http.put(`${environment.SERVER_URL}/playlist`, { id: this.currentSong.id, isNew: true })
+  updateCurrentSong(newId: string) {
+    // this.http.put(`${environment.SERVER_URL}/playlist`, { newId: newId, currentId: this.currentSong.id })
+    //   .subscribe(data => console.log('put response', data));
+    this.http.put(`${environment.SERVER_URL}/playlist`, { id: newId, isNew: true })
       .subscribe(data => console.log('put response', data));
-    this.http.put(`${environment.SERVER_URL}/playlist`, { id: oldId, isNew: false })
+    this.http.put(`${environment.SERVER_URL}/playlist`, { id: this.currentSong.id, isNew: false })
       .subscribe(data => console.log('put response', data));
   }
 

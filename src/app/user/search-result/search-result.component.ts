@@ -24,7 +24,7 @@ export class SearchResultComponent implements OnInit {
     const toast = await this.toastController.create({
       message: data["message"],
       position: 'bottom',
-      duration: 2500,
+      duration: 2000,
       color: data["status"],
       buttons: [
         {
@@ -38,7 +38,6 @@ export class SearchResultComponent implements OnInit {
       ]
     });
     toast.present();
-    this.isAdding = false;
   }
 
   addToPlaylist() {
@@ -46,9 +45,10 @@ export class SearchResultComponent implements OnInit {
     this.http.post(`${environment.SERVER_URL}/playlist`, { item: this.result })
       .subscribe((data) => {
         setTimeout(() => {
-          if(data['status'] === 'success')
+          if(data['status'] === 'primary')
             this.socket.emit('updatePlaylist');
           this.presentToastWithOptions(data);
+          this.isAdding = false;
         }, 1100);
       });
   }

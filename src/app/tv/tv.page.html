@@ -28,7 +28,7 @@
       <ion-col size-md="5" size-sm=12>
         <ion-list>
           <app-playlist-item *ngFor="let item of items" [result]="item" (updatePlaylist)="updatePlaylist()"
-            (playSong)="playSongOnClick($event[0])">
+            (playSong)="playNextSong($event[0])">
           </app-playlist-item>
         </ion-list>
       </ion-col>
