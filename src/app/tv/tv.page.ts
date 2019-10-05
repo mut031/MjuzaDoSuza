@@ -44,7 +44,7 @@ export class TvPage implements OnInit {
   onStateChange(event) {
     this.ytEvent = event.data;
     if (this.ytEvent === 0) {
-      this.playNextSong(this.items[this.currentSongIndex + 1] ? this.items[this.currentSongIndex + 1].id : this.items[0].id);
+      this.playNextSong(this.items[this.currentSongIndex + 1] ? this.items[this.currentSongIndex + 1]._id : this.items[0]._id);
     }
   }
 
@@ -63,7 +63,7 @@ export class TvPage implements OnInit {
     //   .subscribe(data => console.log('put response', data));
     this.http.put(`${environment.SERVER_URL}/playlist`, { id: newId, isNew: true })
       .subscribe(data => console.log('put response', data));
-    this.http.put(`${environment.SERVER_URL}/playlist`, { id: this.currentSong.id, isNew: false })
+    this.http.put(`${environment.SERVER_URL}/playlist`, { id: this.currentSong._id, isNew: false })
       .subscribe(data => console.log('put response', data));
   }
 

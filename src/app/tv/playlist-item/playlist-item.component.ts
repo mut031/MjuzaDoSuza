@@ -34,7 +34,7 @@ export class PlaylistItemComponent implements OnInit {
   }
 
   playMe() {
-    this.playSong.emit([this.result.id]);
+    this.playSong.emit([this.result._id]);
   }
 
   async presentToastWithOptions(data) {

@@ -42,7 +42,7 @@ export class UserPage implements OnInit {
       .filter(item => item.video.duration !== 'Playlist')
       .map(item => {
         return {
-          id: item.video.id,
+          _id: item.video.id,
           title: item.video.title,
           description: item.uploader.username,
           thumbnail: item.video.thumbnail_src,

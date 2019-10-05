@@ -22,7 +22,7 @@
   <ion-grid class="grid ion-padding">
     <ion-row>
       <ion-col size-md="7" size-sm="12" class="col">
-        <youtube-player [videoId]="currentSong.id"  (ready)="savePlayer($event)" (change)="onStateChange($event)">
+        <youtube-player [videoId]="currentSong._id"  (ready)="savePlayer($event)" (change)="onStateChange($event)">
         </youtube-player>
       </ion-col>
       <ion-col size-md="5" size-sm=12>
