@@ -1,4 +1,4 @@
-<ion-item [attr.color]="result.isCurrent ? 'primary' : ''" class="item">
+<ion-item [attr.color]="result._id === currentId ? 'primary' : ''" class="item" [disabled]="result._id === currentId ? true : false">
   <ion-thumbnail (click)="playMe()" class="ion-margin-end thumbnail">
     <img src="{{result.thumbnail}}">
   </ion-thumbnail>
@@ -6,5 +6,5 @@
     <h2 (click)="playMe()" class="title">{{result?.title}}</h2>
     <p>{{result?.description}}</p>
   </ion-label>
-  <ion-icon (click)="removeFromPlaylist()" name="trash" class="ion-margin-start trash" color="danger"></ion-icon>
+  <ion-icon (click)="deleteMe()" name="trash" class="ion-margin-start trash" color="danger"></ion-icon>
 </ion-item>

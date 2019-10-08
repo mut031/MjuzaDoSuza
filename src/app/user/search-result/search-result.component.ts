@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Item } from '../item.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Socket } from 'ngx-socket-io';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -14,11 +13,9 @@ export class SearchResultComponent implements OnInit {
   @Input() result: Item;
   isAdding: boolean = false;
 
-  constructor(private http: HttpClient, private socket: Socket, public toastController: ToastController) { }
+  constructor(private http: HttpClient, public toastController: ToastController) { }
 
-  ngOnInit() {
-    this.socket.connect();
-  }
+  ngOnInit() {}
 
   async presentToastWithOptions(data) {
     const toast = await this.toastController.create({
@@ -42,11 +39,9 @@ export class SearchResultComponent implements OnInit {
 
   addToPlaylist() {
     this.isAdding = true;
-    this.http.post(`${environment.SERVER_URL}/playlist`, { item: this.result })
+    this.http.post(`${environment.SERVER_URL}/song`, { item: this.result })
       .subscribe((data) => {
         setTimeout(() => {
-          if(data['status'] === 'primary')
-            this.socket.emit('updatePlaylist');
           this.presentToastWithOptions(data);
           this.isAdding = false;
         }, 1100);

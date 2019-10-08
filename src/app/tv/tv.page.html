@@ -1,23 +1,4 @@
-<!-- <ion-content *ngIf="currentSong">
-  <ion-grid class="grid ion-padding">
-    <ion-row fixed>
-        <youtube-player [videoId]="currentSong.id" [height]="500" [width]="800" (ready)="savePlayer($event)" (change)="onStateChange($event)">
-        </youtube-player>
-
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <app-playlist-item *ngFor="let item of items" [result]="item" (updatePlaylist)="updatePlaylist()"
-            (playSong)="playSongOnClick($event[0])">
-          </app-playlist-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content> -->
-
+<h1>{{roomId}}</h1>
 <ion-content *ngIf="currentSong">
   <ion-grid class="grid ion-padding">
     <ion-row>
@@ -27,8 +8,8 @@
       </ion-col>
       <ion-col size-md="5" size-sm=12>
         <ion-list>
-          <app-playlist-item *ngFor="let item of items" [result]="item" (updatePlaylist)="updatePlaylist()"
-            (playSong)="playNextSong($event[0])">
+          <app-playlist-item *ngFor="let item of items" [result]="item" [currentId]="currentSong._id"
+            (playSong)="playNextSong($event[0])" (deleteSong)="removeSongFromPlaylist($event[0])">
           </app-playlist-item>
         </ion-list>
       </ion-col>

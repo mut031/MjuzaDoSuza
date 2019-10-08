@@ -1,13 +1,14 @@
 <ion-content class="ion-text-center ion-padding content">
     <h1 class="title">Mjuza Do Suza</h1>
-
-    <ion-button shape="round" routerLink="/user">
-        <ion-icon slot="start" name="search"></ion-icon>
-        Search songs
-    </ion-button>
-
-    <ion-button shape="round" routerLink="/tv">
+    <ion-button shape="round" (click)="createRoom()">
         <ion-icon slot="start" name="headset"></ion-icon>
-        Go to playlist
+        Create room
     </ion-button>
+
+    <ion-button shape="round" (click)="joinRoom()">
+        <ion-icon slot="start" name="headset"></ion-icon>
+        Join room
+    </ion-button>
+    
+  <ion-searchbar [(ngModel)]="joinRoomId"></ion-searchbar>
 </ion-content>

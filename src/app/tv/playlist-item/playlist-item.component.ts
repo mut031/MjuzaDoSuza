@@ -1,9 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Item } from 'src/app/user/item.model';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-playlist-item',
@@ -12,48 +8,21 @@ import { ToastController } from '@ionic/angular';
 })
 export class PlaylistItemComponent implements OnInit {
   @Input() result: Item;
-  @Output() updatePlaylist: EventEmitter<any> = new EventEmitter();
+  @Input() currentId: string;
   @Output() playSong: EventEmitter<any> = new EventEmitter();
+  @Output() deleteSong: EventEmitter<any> = new EventEmitter();
 
-  httpOptions;
+  constructor() { }
 
-  constructor(private http: HttpClient, public toastController: ToastController) { }
+  ngOnInit() { }
 
-  ngOnInit() {
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-      body: this.result
-    };
-  }
-
-  removeFromPlaylist() {
-    this.http.delete(`${environment.SERVER_URL}/playlist`, this.httpOptions)
-      .subscribe(data => this.presentToastWithOptions(data));
+  deleteMe() {
+    if(this.currentId !== this.result._id)
+      this.deleteSong.emit([this.result]);
   }
 
   playMe() {
-    this.playSong.emit([this.result._id]);
-  }
-
-  async presentToastWithOptions(data) {
-    const toast = await this.toastController.create({
-      message: data["message"],
-      position: 'bottom',
-      duration: 2000,
-      color: data["status"],
-      buttons: [
-        {
-          side: 'start',
-          icon: 'musical-notes',
-        },
-        {
-          icon: 'close',
-          role: 'cancel'
-        }
-      ]
-    });
-    toast.present();
+    if(this.currentId !== this.result._id)
+      this.playSong.emit([this.result._id]);
   }
 }

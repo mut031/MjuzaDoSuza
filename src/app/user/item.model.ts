@@ -3,6 +3,12 @@ export interface Item {
     title: string;
     description: string;
     thumbnail: string;
-    isCurrent: boolean;
     duration: string;
+    playlists: Array<PlaylistItem>;
+}
+
+interface PlaylistItem {
+    roomId: string;
+    isCurrent: boolean;
+    timeCreated: number;
 }
