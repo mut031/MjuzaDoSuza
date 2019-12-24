@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ modalName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card style="text-align: center">
+      <ion-item class="user-input">
+          <ion-input type="text" id="username" [(ngModel)]="username" placeholder="Username">
+          </ion-input>
+      </ion-item>
+      <ion-item class="user-input">
+          <ion-input type="password" id="password" [(ngModel)]="password" placeholder="Password">
+          </ion-input>
+      </ion-item>
+      <ion-button color="danger" id="submitBtn" shape="round" (click)="modalName === 'Login' ? login() : register()">
+          Submit
+      </ion-button>
+  </ion-card>
+    
+</ion-content>

@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Socket } from 'ngx-socket-io';
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastController } from '@ionic/angular';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-tv',
@@ -16,28 +17,29 @@ export class TvPage implements OnInit {
   items: Item[] = [];
   currentSong: Item;
   roomId: string;
+  showPlayer: boolean = true;
 
   private player;
   private ytEvent;
   private currentSongIndex;
 
-  constructor(private http: HttpClient, private socket: Socket, private route: ActivatedRoute, private router: Router, public toastController: ToastController) { }
+  constructor(
+    private ds: DataService, private http: HttpClient, private socket: Socket, private route: ActivatedRoute, private router: Router, public toastController: ToastController) { }
 
   ngOnInit() {
     this.roomId = this.route.snapshot.paramMap.get('id');
-    if(!this.roomId) {
-      this.router.navigate(['/home'])
-    }
+    
+    this.http.get(`${environment.SERVER_URL}/playlists`)
+      .subscribe((data: any) => {
+        if (!data.filter(item => item.title === this.roomId).length)
+          this.router.navigate(['/home'])
+      });
+
     this.socket.connect();
     this.socket.emit('createRoom', { roomId: this.roomId });
     this.socket.fromEvent('update').subscribe(() => {
       this.getPlaylistForRoom();
     });
-    this.http.post(`${environment.SERVER_URL}/playlist`, { item: { title: this.roomId, description: 'test description', user: 'userId' } })
-      .subscribe(data => {
-        if(data) 
-          this.presentToastWithOptions(data);
-      });
     this.getPlaylistForRoom();
   }
 

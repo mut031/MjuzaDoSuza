@@ -1,17 +1,28 @@
-<h1>{{roomId}}</h1>
-<ion-content *ngIf="currentSong">
-  <ion-grid class="grid ion-padding">
+<ion-content>
+  <ion-grid>
     <ion-row>
-      <ion-col size-md="7" size-sm="12" class="col">
-        <youtube-player [videoId]="currentSong._id"  (ready)="savePlayer($event)" (change)="onStateChange($event)">
-        </youtube-player>
-      </ion-col>
-      <ion-col size-md="5" size-sm=12>
-        <ion-list>
-          <app-playlist-item *ngFor="let item of items" [result]="item" [currentId]="currentSong._id"
-            (playSong)="playNextSong($event[0])" (deleteSong)="removeSongFromPlaylist($event[0])">
-          </app-playlist-item>
-        </ion-list>
+      <ion-col offset="2" class="align-items-center justify-content-center" size="8">
+
+        <ion-card>
+          <ion-card-header>
+
+            <h1 class="mobile">Room code: {{roomId | uppercase}}</h1>
+            <ion-item  lines="none">
+                <ion-label>Show video player</ion-label>
+                <ion-toggle slot="start"  [(ngModel)]="showPlayer"  name="blueberry" checked></ion-toggle>
+              </ion-item>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center" *ngIf="currentSong">
+            <youtube-player width="70%" [hidden]="!showPlayer" [videoId]="currentSong._id" (ready)="savePlayer($event)"
+              (change)="onStateChange($event)">
+            </youtube-player>
+            <ion-list>
+              <app-playlist-item *ngFor="let item of items" [result]="item" [currentId]="currentSong._id"
+                (playSong)="playNextSong($event[0])" (deleteSong)="removeSongFromPlaylist($event[0])">
+              </app-playlist-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

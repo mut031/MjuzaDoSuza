@@ -1,3 +1,45 @@
 .content {
-    --background: #fff url('https://img.freepik.com/vrije-photo/abstract-inkblot_1112-816.jpg?size=626&ext=jpg') no-repeat center center / cover;
+    // --background: #fff url('https://img.freepik.com/vrije-photo/abstract-inkblot_1112-816.jpg?size=626&ext=jpg') no-repeat center center / cover;    
+}
+
+ion-card {
+    min-height: 100%;
+}
+
+ion-icon {
+    font-size: 64px;
+}
+
+
+ion-input {
+    text-align: center;
+    --border-color: black;
+}
+
+.room-input {
+    margin-top: 15px;
+    --border-style: solid;
+    --border-width: 1px;
+}
+
+.user-input {
+    margin-right: 10px;
+}
+
+// body {
+//   font-family: 'Custom', Fallback, sans-serif !important;
+// }
+
+// @font-face {
+//     font-family: 'Custom';
+//     src: url('/assets/font/GrinchedRegular.otf') format('opentype');
+// }
+
+@import url("https://fonts.googleapis.com/css?family=Girassol|Indie+Flower&display=swap");
+.title {
+  font-family: 'Indie Flower', sans-serif;
+  font-size: 64px;
+}
+span {
+  font-family: sans-serif;
 }

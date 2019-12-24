@@ -25,8 +25,8 @@ export class UserPage implements OnInit {
       this.router.navigate(['/home'])
     }
     this.http.get(`${environment.SERVER_URL}/playlists`)
-      .subscribe((data: Array<string>) => {
-        if (!data.includes(this.roomId))
+      .subscribe((data: any) => {
+        if (!data.filter(item => item.title === this.roomId).length)
           this.router.navigate(['/home'])
       });
   }
