@@ -39,8 +39,6 @@ export class HomePage implements OnInit, OnDestroy {
     this.ds.setUsername("");
   }
 
- 
-
   createRoom() {
     let roomId = this.makeid(5);
     this.http.post(`${environment.SERVER_URL}/playlist`, { item: { title: roomId, description: 'test description', user: this.ds.getUsername() } })
@@ -102,12 +100,9 @@ export class HomePage implements OnInit, OnDestroy {
     return await modal.present();
   }
 
-  
   ngOnDestroy() {
     if(this.sub) {
       this.sub.unsubscribe();
     }
   }
-
-
 }

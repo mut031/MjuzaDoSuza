@@ -1,9 +1,6 @@
-.content {
-    // --background: #fff url('https://img.freepik.com/vrije-photo/abstract-inkblot_1112-816.jpg?size=626&ext=jpg') no-repeat center center / cover;    
-}
-
 ion-card {
     min-height: 100%;
+    background: white;
 }
 
 ion-icon {
@@ -39,6 +36,7 @@ ion-input {
 .title {
   font-family: 'Indie Flower', sans-serif;
   font-size: 64px;
+  font-weight: bold;
 }
 span {
   font-family: sans-serif;

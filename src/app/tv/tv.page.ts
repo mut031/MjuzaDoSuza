@@ -15,9 +15,13 @@ import { DataService } from '../services/data.service';
 })
 export class TvPage implements OnInit {
   items: Item[] = [];
+  playlist: Item[] = [];
   currentSong: Item;
   roomId: string;
   showPlayer: boolean = true;
+  showAllSongs: boolean = false;
+
+  qrUrl : string = '';
 
   private player;
   private ytEvent;
@@ -49,7 +53,15 @@ export class TvPage implements OnInit {
         this.items = data;
         this.currentSong = this.items.filter(item => item.playlists.find(item => item.roomId === this.roomId && item.isCurrent))[0];
         this.currentSongIndex = this.items.indexOf(this.currentSong);
+        this.playlist = this.items.filter((value, index) => index + 2 >= this.currentSongIndex);
       });
+  }
+
+  showHideSongs() {
+    if(this.showAllSongs)
+      this.playlist = this.items;
+    else 
+      this.playlist = this.items.filter((value, index) => index + 2 >= this.currentSongIndex);
   }
 
   onStateChange(event) {

@@ -1,4 +1,7 @@
-.item {
+ion-item {
     cursor: pointer;
     // --inner-border-width: 0;
+    --border-color: hsl(0, 0%, 90%);
+    --background: white;
+    // margin-bottom: 5px;
 }

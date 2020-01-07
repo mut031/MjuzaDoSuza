@@ -25,10 +25,16 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+.content {
+  // --background: #fff url('https://img.freepik.com/vrije-photo/abstract-inkblot_1112-816.jpg?size=626&ext=jpg') no-repeat center center / cover;
+  --background: #fff url(../src/img/background2.png);
+  background-repeat: space;
+}
+
 
 @media (min-width: 320px) and (max-width: 480px) {
   
-    .mobile {
+    .web {
         display: none;
     }
     
@@ -44,7 +50,7 @@
 
   @media  (min-width: 481px) {
   
-    .web {
+    .mobile {
         display: none;
     }
     

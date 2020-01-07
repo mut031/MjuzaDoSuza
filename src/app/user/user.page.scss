@@ -1,3 +1,9 @@
+@media (min-width: 480px) { 
+    .zoom {
+        zoom: 1.2;
+    }
+  }
+
 #spinner {
     display: block;
     margin: auto;
@@ -10,5 +16,10 @@
 }
 
 #search {
-    --icon-color: #3880ff;
+    --icon-color: #ffce00;
+    --background: white;
+}
+
+ion-content{
+    --ion-background-color: transparent;
 }

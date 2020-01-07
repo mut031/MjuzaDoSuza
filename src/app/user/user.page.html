@@ -1,24 +1,48 @@
-<ion-content class="ion-padding" *ngIf="!isSearching">
+<!-- <ion-header>
+    <ion-toolbar *ngIf="!user">
+        <ion-buttons slot="end">
+            <ion-button id="loginBtn" shape="round" (click)="presentModal('Login')">
+                Login
+            </ion-button>
+            <ion-button id="registerBtn" shape="round" (click)="presentModal('Register')">
+                Register
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="user">
+        <ion-item lines="none">
+        <ion-thumbnail class="ion-margin-end">
+            <img src="../../assets/icons/profile-icon.png">
+        </ion-thumbnail>
+        <h5>Hello, {{user}}!</h5>
+    </ion-item>
+        <ion-buttons slot="end">
+            <ion-button id="logoutBtn" shape="round" (click)="logout()">
+                Logout
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header> -->
+<ion-content class="content zoom">
   <ion-searchbar id="search" [(ngModel)]="query" (change)="onSearch($event)"></ion-searchbar>
   <ion-list>
     <app-search-result *ngFor="let item of items" [result]="item"></app-search-result>
   </ion-list>
 
-  <ion-content *ngIf="!items.length && !firstSearch" class="ion-text-center">
+  <div class="ion-text-center content" *ngIf="!items.length && !firstSearch">
     <ion-icon name="outlet" class="outlet" color="danger"></ion-icon>
-    <ion-text color="medium">
+    <ion-text>
       <h1>Oh snap!</h1>
       <p>No results found for "{{query}}"</p>
     </ion-text>
-  </ion-content>
+  </div>
 
-  <ion-content *ngIf="firstSearch" class="ion-text-center">
-    <ion-icon name="musical-notes" class="notes" color="primary"></ion-icon>
-    <ion-text color="medium">
+  <div class="ion-text-center content" *ngIf="firstSearch">
+    <ion-icon name="musical-notes" class="notes" color="warning"></ion-icon>
+    <ion-text>
       <h1>Mjuza Do Suza</h1>
       <p>Search and add songs to playlist</p>
     </ion-text>
-  </ion-content>
-
+  </div>
+  <ion-spinner id="spinner" color="primary" *ngIf="isSearching"></ion-spinner>
 </ion-content>
-<ion-spinner id="spinner" color="primary" *ngIf="isSearching"></ion-spinner>

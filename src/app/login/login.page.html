@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card style="text-align: center">
+  <ion-card *ngIf="modalName !== 'My rooms'" style="text-align: center">
       <ion-item class="user-input">
           <ion-input type="text" id="username" [(ngModel)]="username" placeholder="Username">
           </ion-input>
@@ -18,5 +18,12 @@
           Submit
       </ion-button>
   </ion-card>
-    
+  <ion-list *ngIf="modalName === 'My rooms'">
+    <ion-item *ngFor="let item of myRooms">
+      <ion-text (click)="openRoom(item.title)">
+        {{item.title}}
+      </ion-text>
+      <ion-icon slot="end" (click)="deleteRoom(item.title)" name="trash" color="warning"></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>

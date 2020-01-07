@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { TvPage } from './tv.page';
 import { PlaylistItemComponent } from './playlist-item/playlist-item.component';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    NgxQRCodeModule,
     CommonModule,
     FormsModule,
     IonicModule,

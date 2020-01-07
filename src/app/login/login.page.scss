@@ -2,3 +2,10 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
+ion-text {
+    cursor: pointer;
+    &:hover {
+        --background: aliceblue;
+    }
+}

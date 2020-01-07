@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ToastController, ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataService } from '../services/data.service';
 import { Subscription } from 'rxjs';
+import { Item } from '../user/item.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class LoginPage implements OnInit {
   @Input('modalName') modalName: string;
+  myRooms = [];
   username: string = "";
   password: string = "";
   user: string = "";
@@ -20,10 +23,20 @@ export class LoginPage implements OnInit {
     , private http: HttpClient
     , private ds: DataService
     , private modalController: ModalController
+    , private router: Router
   ) { }
 
   ngOnInit() {
-    console.log(this.modalName)
+    if(this.modalName === 'My rooms') {
+      this.getMyRooms();
+    }
+  }
+
+  getMyRooms() {
+    this.http.get(`${environment.SERVER_URL}/playlists`)
+        .subscribe((data: any) => {
+          this.myRooms = data.filter(item => item.user === this.ds.getUsername());
+        });
   }
 
   register() {
@@ -69,6 +82,26 @@ export class LoginPage implements OnInit {
         }
         this.presentToastWithOptions({ message: "Username doesn't exist.", status: "danger" });
       });
+  }
+
+  openRoom(roomId: string){
+    this.modalController.dismiss();
+    this.router.navigate(['/tv', { id: roomId }]);
+  }
+
+  deleteRoom(roomId: string){
+    console.log(roomId)
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: {roomId: roomId} 
+    };
+    this.http.delete(`${environment.SERVER_URL}/playlists`, httpOptions)
+        .subscribe(data => {
+          this.presentToastWithOptions(data);
+          this.getMyRooms();
+        });
   }
 
   async presentToastWithOptions(data) {
