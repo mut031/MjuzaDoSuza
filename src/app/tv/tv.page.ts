@@ -21,6 +21,7 @@ export class TvPage implements OnInit {
   showPlayer: boolean = true;
   showAllSongs: boolean = false;
 
+  a: string = 'url';
   qrUrl : string = '';
 
   private player;
