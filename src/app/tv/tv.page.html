@@ -17,6 +17,10 @@
               <ion-label>Full playlist</ion-label>
               <ion-toggle slot="start" [(ngModel)]="showAllSongs"  (ngModelChange)="showHideSongs()"></ion-toggle>
             </ion-item>
+            <ion-item lines="none">
+              <ion-label>Full playlist</ion-label>
+              <ion-toggle slot="start" [(ngModel)]="shuffle"></ion-toggle>
+            </ion-item>
           </ion-card-header>
           <ion-card-content class="ion-text-center" *ngIf="currentSong">
             <youtube-player width="100%" [hidden]="!showPlayer" [videoId]="currentSong._id" (ready)="savePlayer($event)"

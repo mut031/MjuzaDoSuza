@@ -14,6 +14,7 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./tv.page.scss'],
 })
 export class TvPage implements OnInit {
+  shuffle: boolean = true;
   items: Item[] = [];
   playlist: Item[] = [];
   currentSong: Item;
@@ -68,7 +69,7 @@ export class TvPage implements OnInit {
   onStateChange(event) {
     this.ytEvent = event.data;
     if (this.ytEvent === 0) {
-      this.playNextSong(this.items[this.currentSongIndex + 1] ? this.items[this.currentSongIndex + 1]._id : this.items[0]._id);
+      this.playNextSong(this.shuffle ? (this.items[Math.floor(Math.random() * this.items.length)]._id) : (this.items[this.currentSongIndex + 1] ? this.items[this.currentSongIndex + 1]._id : this.items[0]._id) );
     }
   }
 
@@ -88,7 +89,7 @@ export class TvPage implements OnInit {
   playNextSong(newSongId: string) {
     if (newSongId !== this.currentSong._id) {
       this.updateCurrentSong(newSongId);
-      this.player.loadVideoById(newSongId);
+      this.player.loadVideoById(newSongId, 20);
     }
   }
 
@@ -109,6 +110,7 @@ export class TvPage implements OnInit {
   }
 
   playVideo() {
+    this.player.seekTo(20);
     this.player.playVideo();
   }
 
